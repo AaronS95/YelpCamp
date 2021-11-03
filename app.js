@@ -82,7 +82,7 @@ app.use(session(sessionConfig));
 app.use(flash());
 
 // Helmet config
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(helmet());
 
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
