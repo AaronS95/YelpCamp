@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utilities/ExpressError");
@@ -40,6 +39,8 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
+const app = express();
+
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -63,6 +64,8 @@ const store = MongoDBStore.create({
 store.on("error", function (e) {
   console.log("Session store error: ", e);
 });
+
+app.set("trust proxy", 1); // trust first proxy
 
 const sessionConfig = {
   store,
